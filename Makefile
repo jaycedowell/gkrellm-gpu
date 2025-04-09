@@ -12,6 +12,8 @@ PLUGIN_DIR ?= $(HOME)/.gkrellm2/plugins
 
 OBJS = gpu-plugin.o
 
+.PHONEY: all clean install test
+
 all: $(PLUGIN_NAME).so
 
 $(PLUGIN_NAME).so: $(OBJS)
@@ -20,9 +22,15 @@ $(PLUGIN_NAME).so: $(OBJS)
 .c.o:
 	$(CC) $(CFLAGS) $(GTK_CFLAGS) $(GKRELLM_INCLUDE) $(NVML_CFLAGS) -c $< -o $@
 
+test: $(PLUGIN_NAME).so
+	$(MAKE) -C tests
+	LD_LIBRARY_PATH=. tests/test-linking
+
 clean:
 	rm -f *.o *.so
+	$(MAKE) -C tests clean
 
 install:
 	mkdir -p $(PLUGIN_DIR)
 	cp $(PLUGIN_NAME).so $(PLUGIN_DIR)
+
