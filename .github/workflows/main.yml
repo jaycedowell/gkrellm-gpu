@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-2204
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
     - name: "Software Install - Ubuntu"
@@ -14,7 +14,8 @@ jobs:
           gkrellm \
           libgtk2.0-dev \
           pkg-config \
-          software-properties-common
+          software-properties-common \
+          wget
     - name: "Software Install - CUDA"
       run: |
         wget https://developer.download.nvidia.com/compute/cuda/repos/ubunt2204/x86_64/cuda-keyring_1.1-1_all.deb
