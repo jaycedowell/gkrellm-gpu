@@ -22,7 +22,8 @@ jobs:
         sudo dpkg -i cuda-keyring_1.1-1_all.deb
         sudo apt-get update
         sudo apt-get install -y \
-          cuda-nvml-dev-12-6
+          cuda-nvml-dev-12-6 \
+          libnvidia-compute-560
     - name: "Build and Test"
       run: |
         make

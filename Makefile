@@ -24,7 +24,7 @@ $(PLUGIN_NAME).so: $(OBJS)
 
 test: $(PLUGIN_NAME).so
 	$(MAKE) -C tests
-	LD_LIBRARY_PATH=. tests/test-linking
+	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):. tests/test-linking
 
 clean:
 	rm -f *.o *.so
